@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://main_postgres:5432/postgres
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  liquibase:
+    change-log: db/changelog/db.changelog-master.yaml
+    enabled: true
+
+server:
+  port: 8082
+
+logging:
+  level:
+    root: info
