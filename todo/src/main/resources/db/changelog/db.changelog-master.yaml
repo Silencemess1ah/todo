@@ -1,5 +1,0 @@
-databaseChangeLog:
-  - include:
-      file: classpath:db/changelog/changeset/task_V001__initial.sql
-  - include:
-      file: classpath:db/changelog/changeset/task_V002__testvalues.sql

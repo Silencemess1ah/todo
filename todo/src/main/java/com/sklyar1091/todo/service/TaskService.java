@@ -4,6 +4,8 @@ import com.sklyar1091.todo.dto.TaskCreationDto;
 import com.sklyar1091.todo.dto.TaskDto;
 import com.sklyar1091.todo.dto.filter.TaskFilterDto;
 import com.sklyar1091.todo.dto.sort.TaskSortDto;
+import com.sklyar1091.todo.exception.ApiError;
+import com.sklyar1091.todo.exception.ErrorMessage;
 import com.sklyar1091.todo.exception.TaskNotFoundException;
 import com.sklyar1091.todo.filter.Filter;
 import com.sklyar1091.todo.mapper.TaskMapper;
@@ -15,6 +17,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Slf4j
@@ -28,14 +33,19 @@ public class TaskService {
     private final List<Sort<TaskSortDto, Task>> taskSort;
 
     public TaskDto createTask(TaskCreationDto taskCreationDto) {
+        ZonedDateTime deadlineInMoscow =
+                taskCreationDto.getDeadLine().atZone(ZoneId.of("Europe/Moscow"));
+
         Task task = Task.builder()
                 .name(taskCreationDto.getName())
                 .description(taskCreationDto.getDescription())
-                .deadLine(taskCreationDto.getDeadLine())
+                .deadLine(deadlineInMoscow.toLocalDateTime())
                 .taskStatus(TaskStatus.TODO)
                 .build();
-        log.info("Creating new task named {}", task.getName());
-        return taskMapper.toDto(taskRepository.save(task));
+        log.debug("Creating new task named {}", task.getName());
+        Task savedTask = taskRepository.save(task);
+        log.debug("Saved task with id {} , successfully", savedTask.getId());
+        return taskMapper.toDto(savedTask);
     }
 
     public List<TaskDto> getAll() {
@@ -47,7 +57,7 @@ public class TaskService {
     public void deleteTask(Long taskId) {
         Task task = getTaskById(taskId);
         taskRepository.deleteById(task.getId());
-        log.info("Task with id {} , successfully deleted", taskId);
+        log.debug("Task with id {} , successfully deleted", taskId);
     }
 
     public TaskDto updateTask(TaskDto taskDto) {
@@ -57,17 +67,19 @@ public class TaskService {
         taskToBeUpdated.setDescription(taskDto.getDescription());
         taskToBeUpdated.setDeadLine(taskDto.getDeadLine());
         taskToBeUpdated.setTaskStatus(taskDto.getTaskStatus());
-        log.info("New Task name - {} , description - {}, deadline - {} , status - {}",
+        log.debug("New Task name - {} , description - {}, deadline - {} , status - {}",
                 taskToBeUpdated.getName(), taskToBeUpdated.getDescription(),
                 taskToBeUpdated.getDeadLine(), taskToBeUpdated.getTaskStatus());
 
-        return taskMapper.toDto(taskRepository.save(taskToBeUpdated));
+        Task updatedTask = taskRepository.save(taskToBeUpdated);
+        log.debug("Updated task with id {}", updatedTask.getId());
+        return taskMapper.toDto(updatedTask);
     }
 
-    private Task getTaskById(Long taskId) {
+    public Task getTaskById(Long taskId) {
         return taskRepository.findById(taskId)
-                .orElseThrow(() -> new TaskNotFoundException("Task with id " + taskId + " not found! " +
-                        "Check taskId and try again"));
+                .orElseThrow(() -> new TaskNotFoundException(new ApiError(ErrorMessage.TASK_NOT_FOUND,
+                        "Check Task ID and try again!")));
     }
 
 

@@ -18,12 +18,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TaskCreationDto {
 
-    @NotBlank
-    @Size(max = 64)
+    @NotBlank(message = "{task.creation.name.notblank}")
+    @Size(max = 64, message = "{task.creation.name.size}")
     private String name;
-    @NotBlank
-    @Size(max = 256)
+
+    @NotBlank(message = "{task.creation.description.notblank}")
+    @Size(max = 256, message = "{task.creation.description.size}")
     private String description;
-    @NotNull
+
+    @NotNull(message = "{task.creation.deadline.notnull}")
     private LocalDateTime deadLine;
 }

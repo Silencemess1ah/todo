@@ -8,11 +8,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
 
@@ -23,23 +25,24 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_id")
-    private Long id;
+    Long id;
 
     @Column(name = "name", length = 64, nullable = false)
-    private String name;
+    String name;
 
     @Column(name = "description", length = 256, nullable = false)
-    private String description;
+    String description;
 
     @Column(name = "dead_line", nullable = false)
-    private LocalDateTime deadLine;
+    LocalDateTime deadLine;
 
-    @Column(name = "status", length = 24, nullable = false) //todo сделать длинну больше 10 (24)
+    @Column(name = "status", length = 24, nullable = false)
     @Enumerated(EnumType.STRING)
-    private TaskStatus taskStatus;
+    TaskStatus taskStatus;
 }

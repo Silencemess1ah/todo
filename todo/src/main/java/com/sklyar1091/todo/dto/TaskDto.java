@@ -17,16 +17,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TaskDto {
 
-    @NotNull
+    @NotNull(message = "{task.id.notnull}")
     private Long id;
-    @NotBlank
-    @Size(max = 64)
+
+    @NotBlank(message = "{task.name.notblank}")
+    @Size(max = 64, message = "{task.name.size}")
     private String name;
-    @NotBlank
-    @Size(max = 256)
+
+    @NotBlank(message = "{task.description.notblank}")
+    @Size(max = 256, message = "{task.description.size}")
     private String description;
-    @NotNull
+
+    @NotNull(message = "{task.deadline.notnull}")
     private LocalDateTime deadLine;
-    @NotNull
+
+    @NotNull(message = "{task.status.notnull}")
     private TaskStatus taskStatus;
 }

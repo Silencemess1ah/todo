@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://main_postgres:5432/postgres
-    username: user
-    password: password
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -15,7 +15,7 @@ spring:
         format_sql: true
 
   liquibase:
-    change-log: db/changelog/db.changelog-master.yaml
+    change-log: db/changelog/db.changelog-master.xml
     enabled: true
 
 server:
@@ -24,3 +24,10 @@ server:
 logging:
   level:
     root: info
+
+api:
+  path:
+    base: "/v1/tasks"
+    delete: "/v1/tasks/{taskId}"
+    filter: "/v1/tasks/filter"
+    sort: "/v1/tasks/sort"
