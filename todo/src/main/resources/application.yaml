@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  liquibase:
+    change-log: db/changelog/db.changelog-master.xml
+    enabled: true
+
+server:
+  port: 8082
+
+logging:
+  level:
+    root: info
+
+api:
+  path:
+    base: "/v1/tasks"
+    delete: "/v1/tasks/{taskId}"
+    filter: "/v1/tasks/filter"
+    sort: "/v1/tasks/sort"

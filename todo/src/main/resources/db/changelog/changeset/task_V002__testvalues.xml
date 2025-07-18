@@ -1,0 +1,95 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+     <changeSet id="task_V002__testvalues" author="Sergey">
+
+        <insert tableName="tasks">
+            <column name="name" value="Разработка API"/>
+            <column name="description" value="Создать REST API для управления задачами"/>
+            <column name="dead_line" value="2025-08-15 12:00:00"/>
+            <column name="status" value="TODO"/>
+        </insert>
+
+        <insert tableName="tasks">
+            <column name="name" value="Оптимизация базы данных"/>
+            <column name="description" value="Провести анализ и оптимизацию SQL запросов"/>
+            <column name="dead_line" value="2025-07-25 16:00:00"/>
+            <column name="status" value="IN_PROGRESS"/>
+        </insert>
+
+        <insert tableName="tasks">
+            <column name="name" value="Тестирование функционала"/>
+            <column name="description" value="Написать юнит-тесты для основного модуля"/>
+            <column name="dead_line" value="2025-07-20 10:00:00"/>
+            <column name="status" value="TODO"/>
+        </insert>
+
+        <insert tableName="tasks">
+            <column name="name" value="Обновление документации"/>
+            <column name="description" value="Обновить документацию по API"/>
+            <column name="dead_line" value="2025-07-18 14:00:00"/>
+            <column name="status" value="DONE"/>
+        </insert>
+
+        <insert tableName="tasks">
+            <column name="name" value="Миграция данных"/>
+            <column name="description" value="Перенести данные из старой системы"/>
+            <column name="dead_line" value="2025-08-01 09:00:00"/>
+            <column name="status" value="IN_PROGRESS"/>
+        </insert>
+
+        <insert tableName="tasks">
+            <column name="name" value="Рефакторинг кода"/>
+            <column name="description" value="Провести рефакторинг устаревшего кода"/>
+            <column name="dead_line" value="2025-07-30 11:00:00"/>
+            <column name="status" value="TODO"/>
+        </insert>
+
+        <insert tableName="tasks">
+            <column name="name" value="Внедрение CI/CD"/>
+            <column name="description" value="Настроить непрерывную интеграцию"/>
+            <column name="dead_line" value="2025-08-10 15:00:00"/>
+            <column name="status" value="TODO"/>
+        </insert>
+
+        <insert tableName="tasks">
+            <column name="name" value="Обновление UI"/>
+            <column name="description" value="Обновить интерфейс пользователя"/>
+            <column name="dead_line" value="2025-07-22 13:00:00"/>
+            <column name="status" value="IN_PROGRESS"/>
+        </insert>
+
+        <insert tableName="tasks">
+            <column name="name" value="Исправление багов"/>
+            <column name="description" value="Исправить критические ошибки"/>
+            <column name="dead_line" value="2025-07-17 17:00:00"/>
+            <column name="status" value="DONE"/>
+        </insert>
+
+        <insert tableName="tasks">
+            <column name="name" value="Интеграция с платежными системами"/>
+            <column name="description" value="Подключить платежные шлюзы"/>
+            <column name="dead_line" value="2025-08-20 10:00:00"/>
+            <column name="status" value="TODO"/>
+        </insert>
+
+        <insert tableName="tasks">
+            <column name="name" value="Аудит безопасности"/>
+            <column name="description" value="Провести аудит безопасности системы"/>
+            <column name="dead_line" value="2025-07-28 12:00:00"/>
+            <column name="status" value="IN_PROGRESS"/>
+        </insert>
+
+        <insert tableName="tasks">
+            <column name="name" value="Масштабирование системы"/>
+            <column name="description" value="Подготовить систему к росту нагрузки"/>
+            <column name="dead_line" value="2025-08-12 14:00:00"/>
+            <column name="status" value="TODO"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
